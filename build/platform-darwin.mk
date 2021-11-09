@@ -11,6 +11,18 @@ SHLDFLAGS = -dynamiclib -twolevel_namespace -undefined dynamic_lookup \
 SHARED = -dynamiclib
 SHARED += -current_version $(CURRENT_VERSION) -compatibility_version $(COMPATIBILITY_VERSION)
 CFLAGS += -Wall -fPIC -MMD -MP -fstack-protector-all -mmacosx-version-min=10.10
+
+ifeq ($(ARCH), x86_64)
+CFLAGS += --target=x86_64-apple-darwin17.7.0
+LDFLAGS += --target=x86_64-apple-darwin17.7.0
+else ifeq ($(ARCH), x86)
+CFLAGS += --target=i386-apple-darwin17.7.0
+LDFLAGS += --target=i386-apple-darwin17.7.0
+else ifeq ($(ARCH), arm64)
+CFLAGS += --target=arm64-apple-darwin20.5.0
+LDFLAGS += --target=arm64-apple-darwin20.5.0
+endif
+
 ifeq ($(ASM_ARCH), x86)
 ASMFLAGS += -DPREFIX
 ifeq ($(ARCH), x86_64)

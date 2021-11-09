@@ -23,6 +23,14 @@ CFLAGS += -march=armv8-a
 ASMFLAGS += -march=armv8-a
 endif
 
+ifeq ($(ARCH), x86_64)
+CFLAGS += -m64
+endif
+
+ifeq ($(ARCH), x86)
+CFLAGS += -m32
+endif
+
 ifeq ($(CXX), clang++)
 CXXFLAGS += -Wc++11-compat-reserved-user-defined-literal
 endif

@@ -8,7 +8,9 @@ vpath %.rc $(SRC_PATH)
 vpath %.pc.in $(SRC_PATH)
 
 OS=$(shell uname | tr A-Z a-z | tr -d \\-0-9. | sed -E 's/^(net|open|free)bsd/bsd/')
+ifndef ARCH
 ARCH=$(shell uname -m)
+endif
 LIBPREFIX=lib
 LIBSUFFIX=a
 CCAS=$(CC)
